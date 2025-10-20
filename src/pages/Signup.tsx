@@ -18,6 +18,7 @@ const Signup: React.FC = () => {
   
   const handleSignup = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("Signup handler running", { name, email });
 
     // Save user data to localStorage
     const user = { name, email, password };
@@ -78,7 +79,7 @@ const Signup: React.FC = () => {
             />
           </div>
           <div className="inputBox">
-            <input type="submit" value="Sign Up" id="btn" />
+            <button type="submit" id="btn">Sign Up</button>
           </div>
         </form>
         <div className="group">

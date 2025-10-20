@@ -17,6 +17,7 @@ const Login: React.FC = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("Login handler running", { email: email.trim() });
 
     const userStr = localStorage.getItem("user");
     if (!userStr) {
@@ -24,15 +25,31 @@ const Login: React.FC = () => {
       return;
     }
 
+    try {
     const user = JSON.parse(userStr);
 
-    if (email === user.email && password === user.password) {
+    if (email.trim() === (user.email ?? "") && password === (user.password ?? "")) {
+      console.log("Credentials OK — calling navigate");
       alert(`Welcome back, ${user.name}! 🎉`);
+      localStorage.setItem("isLoggedIn", "true");
       // redirect to landing page or dashboard
-      navigate("/app");
+      navigate("/app", { replace: true });
+
+      // fallback: if navigate didn't change the hash, force it after a tiny delay
+      setTimeout(() => {
+        if (window.location.hash !== "#/app") {
+          console.log("Fallback: forcing hash to #/app");
+          window.location.hash = "#/app";
+        }
+      }, 50);
     } else {
+      console.log("Credentials mismatch", { entered: email.trim(), stored: user.email });
       alert("Invalid email or password 😔");
     }
+  } catch (err) {
+    console.error("Failed parsing user from localStorage", err);
+    alert("Stored user data is invalid. Please sign up again.");
+  }
   };
 
   return (
@@ -76,7 +93,7 @@ const Login: React.FC = () => {
             />
           </div>
           <div className="inputBox">
-            <input type="submit" value="Login" id="btn" />
+            <button type="submit" id="btn">Login</button>
           </div>
         </form>
         <div className="group">
