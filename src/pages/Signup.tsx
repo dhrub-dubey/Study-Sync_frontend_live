@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../login.css"; // same CSS for styling
 import bg from "../assets/bg.jpg";
 import girl from "../assets/girl.png";
@@ -14,6 +14,8 @@ const Signup: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+  
   const handleSignup = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -23,7 +25,7 @@ const Signup: React.FC = () => {
 
     alert("Signup successful! 🎉");
     // Optional: redirect to login page
-    window.location.href = "/login";
+    navigate("/login");
   };
 
   return (
