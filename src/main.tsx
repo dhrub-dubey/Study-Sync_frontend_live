@@ -12,19 +12,13 @@ import "./index.css";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <HashRouter>
-    <Routes>
+      <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/forget-password" element={<ForgetPassword />} />
-        <Route
-          path="/app"
-          element={
-            localStorage.getItem("user") ? <App /> : <Navigate to="/login" />
-          }
-        />
-       <Route path="/app" element={<ProtectedRoute><App /></ProtectedRoute>} />
-      </Routes> 
+        <Route path="/app" element={<ProtectedRoute><App /></ProtectedRoute>} />
+      </Routes>
     </HashRouter>
   </StrictMode>
 );

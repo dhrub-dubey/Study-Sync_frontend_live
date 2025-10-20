@@ -26,7 +26,16 @@ const Signup: React.FC = () => {
 
     alert("Signup successful! 🎉");
     // Optional: redirect to login page
-    navigate("/login");
+    try {
+      navigate("/login", { replace: true });
+    } catch (err) {
+      console.error("navigate() error", err);
+    }
+    setTimeout(() => {
+      if (window.location.hash !== "#/login") {
+        window.location.hash = "#/login";
+      }
+    }, 50);
   };
 
   return (
