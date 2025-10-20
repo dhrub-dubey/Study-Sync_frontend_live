@@ -79,7 +79,7 @@ const Signup: React.FC = () => {
             />
           </div>
           <div className="inputBox">
-            <button type="submit" id="btn">Sign Up</button>
+            <input type="submit" value="Sign Up" id="btn" />
           </div>
         </form>
         <div className="group">

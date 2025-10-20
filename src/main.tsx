@@ -1,6 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
+
+import ProtectedRoute from "./components/ProtectedRoute";
 import App from "./App.tsx";
 import Login from "./pages/Login.tsx";
 import Signup from "./pages/Signup.tsx";
@@ -10,7 +12,7 @@ import "./index.css";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <HashRouter>
-      <Routes>
+    <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
@@ -21,7 +23,8 @@ createRoot(document.getElementById("root")!).render(
             localStorage.getItem("user") ? <App /> : <Navigate to="/login" />
           }
         />
-      </Routes>
+       <Route path="/app" element={<ProtectedRoute><App /></ProtectedRoute>} />
+      </Routes> 
     </HashRouter>
   </StrictMode>
 );

@@ -93,7 +93,7 @@ const Login: React.FC = () => {
             />
           </div>
           <div className="inputBox">
-            <button type="submit" id="btn">Login</button>
+            <input type="submit" value="Login" id="btn" />
           </div>
         </form>
         <div className="group">
